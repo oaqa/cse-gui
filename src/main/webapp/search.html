@@ -12,7 +12,7 @@
   $LAB.script("js/jquery-1.7.2.min.js").wait().script("js/prettify.js").script(
       "js/lang-yaml.js").script("js/hogan-2.0.0.min.js").wait().script(
       "js/functions.js").wait().script("js/bootstrap.min.js?2.0.4").script(
-      "js/d3.v2.min.js").script("js/common.js").wait()
+      "js/d3.v2.min.js").script("js/common.js").wait().script("js/jquery.highlight.js").wait()
 </script>
 <link rel="stylesheet" href="css/bootstrap.min.css?2.0.4">
 <link href="css/control.css" rel="stylesheet" type="text/css" />
@@ -67,3 +67,11 @@
 		<!-- /container -->
 </body>
 </html>
+<script>
+  function highlight(){
+    var string = $("#search-field").val();
+    var words = string.split(" ");
+    $(".table tr td").find("div").highlight(words);
+    $(".highlight").css({ backgroundColor: "#FFFF88" });   
+  }
+</script>
