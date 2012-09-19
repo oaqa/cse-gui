@@ -71,7 +71,9 @@
   function highlight(){
     var string = $("#search-field").val();
     var words = string.split(" ");
-    $(".table tr td").find("div").highlight(words);
+    for( w in words){
+      $(".table tr td").find("div").highlight(words[w]);
+    }
     $(".highlight").css({ backgroundColor: "#FFFF88" });   
   }
 </script>
