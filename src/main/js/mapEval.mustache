@@ -1,0 +1,74 @@
+<head>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<link href="/cse-gui/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="/cse-gui/css/DT_bootstrap.css" rel="stylesheet"
+	type="text/css">
+<script language="JavaScript" type="text/javascript"
+	src="/cse-gui/js/jquery-1.7.2.min.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="/cse-gui/js/jquery.dataTables.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="/cse-gui/js/paging.js"></script>
+<link rel="stylesheet" href="css/style.css" media="screen" />
+
+</head>
+<body>
+
+	<table class="table" id="map-table" width="100%">
+	<col width ="20%"/>
+	<col width ="10%"/>
+	<col width ="10%"/>
+	<col width ="10%"/>
+	
+		<thead>
+			<tr>
+				<th>Trace</th>
+				<th>DOCMAP</th>
+				<th>PSGMAP</th>
+				<th>ASPMAP</th>
+				<th>Count</th>
+				<th>Error Analysis</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#rows}}
+			<tr>
+				<td><a class="btn btn-mini btn-info" data-toggle="modal"
+					href="#map-configModal-{{traceHash}}"><i
+						class="icon-info-sign icon-white"></i> View trace</a></td>
+				<td>{{docmap}}</td>
+				<td>{{psgmap}}</td>
+				<td>{{aspmap}}</td>
+				<td>{{count}}</td>
+				<td><a class="btn btn-mini btn-primary"
+					href="./analysis.html?id={{id}}&stage={{stage}}&traceHash={{traceHash}}"><i
+						class="icon-info-sign icon-white"></i> Error analysis</a></td>
+			</tr>
+			{{/rows}}
+		</tbody>
+	</table>
+
+	{{#rows}}
+	<div class="modal hide fade" id="map-configModal-{{traceHash}}">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h3>Trace hash:</h3>
+
+			<h5>{{traceHash}}</h5>
+		</div>
+		<div class="modal-body">
+			<pre class="prettyprint">{{traceId}}</pre>
+		</div>
+		<div class="modal-footer">
+			<a href="#" data-dismiss="modal">Close</a>
+		</div>
+
+	</div>
+	{{/rows}}
+
+
+
+</body>
+

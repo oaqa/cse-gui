@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Experiments · CSE Framework </title>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script src="js/LAB.min.js?2.0.3"></script>
+<script>
+  $LAB.script("js/jquery-1.7.2.min.js").wait().script("js/prettify.js").script(
+      "js/lang-yaml.js").script("js/hogan-2.0.0.min.js").wait().script(
+      "js/functions.js").wait().script("js/bootstrap.min.js?2.0.4").script(
+      "js/d3.v2.min.js").script("js/common.js").wait()
+</script>
+<link rel="stylesheet" href="css/bootstrap.min.css?2.0.4">
+<link href="css/control.css" rel="stylesheet" type="text/css" />
+<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body data-offset="50">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<ul class="nav">
+					<a class="brand" href="./experiments.html">CSE Framework</a>
+					<li class="active">
+					  <a href="./experiments.html">Experiments</a>
+					</li>
+					<li class="">
+					  <a href="trends.html">Trends</a>
+					</li>
+        			<li class="">
+					  <a href="./search.html">Ad-hoc QA</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<head>
+	<script>$LAB.script("js/cse-main.js")</script>
+	</head>
+	<body>
+	<div class="container" id="experiment-tbody">
+	
+	</div>
+	</body>
+	<!-- /container -->
+</body>
+</html>

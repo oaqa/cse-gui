@@ -1,0 +1,41 @@
+<div class="row offset6">
+		<a class="btn btn-mini" href="#keytermsModal"  data-toggle="modal">
+		Inspect</a>
+		<a class="btn btn-mini" href="experiment.html?id={{uuid}}" target="_blank">
+    Go to experiment...</a>
+</div>
+<div class="row spacer span8">
+	<table class="table">
+		<tbody>
+			{{#rows}}
+			<tr>
+				<td>
+          <!-- div>
+            <span class="label">Relevance: {{score}}</span>
+          </div -->
+					<div>{{text}}</div>
+          <div>
+            <a class="btn btn-mini" href="http://www.ncbi.nlm.nih.gov/pubmed/{{docid}}" target="_blank">Open document <i class="icon-download-alt"></i></a>
+          </div>
+				</td>
+			</tr>
+			{{/rows}}
+		</tbody>
+	</table>
+</div>
+<div class="modal hide fade" id="keytermsModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">x</button>
+    <h3>Execution log</h3>
+  </div>
+  <div class="modal-body">
+    {{#keyterms}}
+      <div><h4>Keyterms</h4></div>
+      <div>{{term}}</div>
+      <br>
+    {{/keyterms}}
+  </div>
+  <div class="modal-footer">
+    <a href="#" data-dismiss="modal">Close</a>
+  </div>
+</div>

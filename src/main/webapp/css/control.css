@@ -1,0 +1,60 @@
+body {
+	position: relative;
+	padding-top: 40px;
+	background-color: #fff;
+}
+
+form .input-xsmall,form input.xsmall,form textarea.xsmall,form select.xsmall
+	{
+	width: 70px;
+}
+
+#progress-chart {
+  font: 10px sans-serif;
+}
+
+line {
+  stroke: black;
+}
+
+.rule line {
+  stroke: #fff;
+  stroke-opacity: .2;
+  shape-rendering: crispEdges;
+}
+
+div.labels {
+	border-bottom: solid 1px;
+	border-top: solid 1px;
+}
+
+.label {
+	font-size: 9px;
+}
+
+div.jselected {
+	background-color: #fee9cc;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.spacer {
+    margin-top: 10px; /* define margin as you see fit */
+}
+
+.show-grid {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.show-grid .column,.show-grid .columns {
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	height: 44px;
+	line-height: 30px;
+}
+
+table#eval td { overflow: hidden; }
+
+table#eval { table-layout: fixed; }

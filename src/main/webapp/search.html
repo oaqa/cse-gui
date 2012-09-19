@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Search · CSE Framework </title>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script src="js/LAB.min.js?2.0.3"></script>
+<script>
+  $LAB.script("js/jquery-1.7.2.min.js").wait().script("js/prettify.js").script(
+      "js/lang-yaml.js").script("js/hogan-2.0.0.min.js").wait().script(
+      "js/functions.js").wait().script("js/bootstrap.min.js?2.0.4").script(
+      "js/d3.v2.min.js").script("js/common.js").wait()
+</script>
+<link rel="stylesheet" href="css/bootstrap.min.css?2.0.4">
+<link href="css/control.css" rel="stylesheet" type="text/css" />
+<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body data-offset="50">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<ul class="nav">
+					<a class="brand" href="./experiments.html">CSE Framework</a>
+					<li class="">
+					  <a href="./experiments.html">Experiments</a>
+					</li>
+					<li class="">
+					  <a href="trends.html">Trends</a>
+					</li>
+        			<li class="active">
+					  <a href="./search.html">Ad-hoc QA</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	
+	<script>
+	  $LAB.script("js/cse-query.js")
+	</script>
+	
+	<div class="container">
+		<div class="row">
+			<div>
+				<form class="well form-search" id="search-form">
+					<fieldset>
+						<div class="control-group"  id="search-field-control">
+							<div class="controls">
+								<input type="text" class="span6 search-query" id="search-field"
+									placeholder="How does BARD1 regulate BRCA1 activity?">
+								<button type="submit" class="btn btn-primary"
+									data-loading-text="Running..." id="search-btn">Run</button>
+								<span class="help-inline" id="search-error-help" style="display: none;">Please input at least one term</span>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div id="search-results"></div>
+		</div>
+		<!-- /container -->
+</body>
+</html>

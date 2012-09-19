@@ -1,0 +1,99 @@
+<div class="container">
+	<div class="row">
+		<h2>Experiment: {{id}}</h2>
+	</div>
+	<div class="row">
+		<center><h3>Traces completed per topic</h3></center>
+		<div id="progress-chart"></div>
+	</div>
+	<div class="row">
+		<div class="span5 offset3">
+			<h3>General information</h3>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<td>Name</td>
+						<td>{{name}}</td>
+					</tr>
+					<tr>
+						<td>Author</td>
+						<td>{{author}}</td>
+					</tr>
+					<tr>
+						<td>Date</td>
+						<td>{{date}}</td>
+					</tr>
+          <tr>
+            <td>Traces</td>
+            <td>{{traces}}</td>
+          </tr>
+          <tr>
+            <td>Configured executions</td>
+            <td>{{total}}</td>
+          </tr>
+          <tr>
+            <td>Resource</td>
+            <td>{{resource}}</td>
+          </tr>
+          <tr>     
+            <td></td>         
+            <td><a class="btn btn-mini btn-info" data-toggle="modal"
+              href="#configModal"><i class="icon-info-sign icon-white"></i> View configuration</a>
+            </td>
+          </tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="span4">
+			<h3>Experiment status</h3>
+			<table class="table table-striped">
+				<tbody>
+          <tr>
+            <td>Questions analyzed</td>
+            <td>{{size}}</td>
+          </tr>
+          <tr>
+            <td>Executions</td>
+            <td>{{executions}} / {{expected}}</td>
+          </tr>
+					<tr>
+						<td>Completed</td>
+						<td>{{pct_completed}}%</td>
+					</tr>
+					<tr>
+						<td>Avg. exec time</td>
+						<td>{{avg_exec_time}}</td>
+					</tr>
+					<tr>
+						<td>Total exec time</td>
+						<td>{{execution_time}}</td>
+					</tr>
+					<tr>
+						<td>Wall time</td>
+						<td>{{wall_time}}</td>
+					</tr>
+					<tr>
+						<td>Last execution</td>
+						<td>{{last_execution}}</td>
+					</tr>
+          <tr>           
+            <td></td>
+            <td><a class="btn btn-mini btn-primary" href="./evaluation.html?id={{id}}"><i class="icon-file icon-white"></i> Evaluation results</a></td>
+          </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="modal hide fade" id="configModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">x</button>
+		<h3>{{resource}}</h3>
+	</div>
+	<div class="modal-body">
+		<pre class="prettyprint lang-yaml">{{configuration}}</pre>
+	</div>
+	<div class="modal-footer">
+		<a href="#" data-dismiss="modal">Close</a>
+	</div>
+</div>

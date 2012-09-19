@@ -1,0 +1,27 @@
+
+<script>
+  $LAB.script("js/cse-query.js")
+</script>
+
+<div class="container">
+	<div class="row">
+		<div>
+			<form class="well form-search" id="search-form">
+				<fieldset>
+					<div class="control-group"  id="search-field-control">
+						<div class="controls">
+							<input type="text" class="span6 search-query" id="search-field"
+								placeholder="How does BARD1 regulate BRCA1 activity?">
+							<button type="submit" class="btn btn-primary"
+								data-loading-text="Running..." id="search-btn">Run</button>
+							<span class="help-inline" id="search-error-help" style="display: none;">Please input at least one term</span>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div id="search-results"></div>
+	</div>
+	<!-- /container -->

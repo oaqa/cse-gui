@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Error analysis</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Question</th>
+        <th>Retrieved</th>
+        <th>Relevant</th>
+        <th>Average precision</th>
+        <th>Passage avg prec</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {{#rows}}
+      <tr>
+        <td>{{sid}}</td>
+        <td>{{question}}</td>
+        <td>{{retrieved}}</td>
+        <td>{{relevant}}</td>
+        <td>{{av_map}}</td>
+         <td>{{psgmap}}</td>
+      </tr>
+      {{/rows}}
+    </tbody>
+  </table>

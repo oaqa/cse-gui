@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Copy of index · CSE Framework </title>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script src="js/LAB.min.js?2.0.3"></script>
+<script>
+  $LAB.script("js/jquery-1.7.2.min.js").wait().script("js/prettify.js").script(
+      "js/lang-yaml.js").script("js/hogan-2.0.0.min.js").wait().script(
+      "js/functions.js").wait().script("js/bootstrap.min.js?2.0.4").script(
+      "js/d3.v2.min.js").script("js/common.js").wait()
+</script>
+<link rel="stylesheet" href="css/bootstrap.min.css?2.0.4">
+<link href="css/control.css" rel="stylesheet" type="text/css" />
+<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body data-offset="50">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<ul class="nav">
+					<a class="brand" href="./experiments.html">CSE Framework</a>
+					<li class="">
+					  <a href="./experiments.html">Experiments</a>
+					</li>
+					<li class="">
+					  <a href="trends.html">Trends</a>
+					</li>
+        			<li class="">
+					  <a href="./search.html">Ad-hoc QA</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	
+	<script>$LAB.script("js/cse-main.js")</script>
+	
+	<head>
+	<script language="JavaScript" type="text/javascript" src="/cse-gui/js/jquery-1.7.2.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/cse-gui/js/jquery.dataTables.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/cse-gui/js/jquery.tablesorter.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/cse-gui/js/d3.v2.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/cse-gui/js/common.js"></script>
+	
+	</head>
+	<div class="container">
+	<body>
+		<h1>Experiments</h1>
+		<table class="span12 display dataTable" id="example">
+		<tr>
+		<th>
+		Date
+		</th>
+		<th>
+		Name
+		</th>
+		<th>
+		Id
+		</th>
+		<th>
+		Author
+		</th>
+		<th>
+		Size
+		</th>
+		</tr>
+		
+		<tbody>
+		<tr>
+		<td>
+		cell1
+		</td>
+		<td>
+		cell2
+		</td>
+		<td>
+		cell3
+		</td>
+		<td>
+		cell4
+		</td>
+		<td>
+		cell5
+		</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+	
+	 
+	
+	
+	<script > 
+	$(document).ready(function() {
+	var newRows = Array();
+	var query = "/cse-gui/data/table/experiments"
+	  var jsonString = "";
+	  var rows;
+	  
+	jQuery.ajax({
+	  type: "GET",
+	  url: query,
+	  success: function (json) {
+	  
+	  	rows = json.rows;
+	 /*   for (var i = 0; i < rows.length; i++) {
+	      map(new DateFormat([ "date" ]), rows[i]);
+	    }*/
+	    var converted_data = {
+	    	asData : 'EMPTY'
+	    }
+	    
+	      for (var i = 0; i < rows.length; i++) {
+	      map(new DateFormat([ "date" ]), rows[i]);
+	    }
+	    
+	    for(var i =0; i< rows.length; i++){
+	    		var curRow = rows[i];
+	    		var id = curRow.id;
+	    		var name = curRow.name;
+	    		var author = curRow.author;
+	    		var date = curRow.date;
+	    		var size = curRow.size;
+	    	 	newRows[i] = [id,name,author,date,size]
+	    	 }
+	    	 
+	    
+	    converted_data.asData = newRows;
+	    jsonString = JSON.stringify(newRows);
+	    
+	  }, 
+	  async: false
+	});
+	       
+	console.log(JSON.stringify(newRows));   
+	    $('#example').dataTable( {
+	       "aaData" :  JSON.stringify(newRows),
+			"aoColumns": [
+				{ "sTitle": "Date","aTargets": [0] },
+				{ "sTitle": "Name","aTargets": [1] },
+				{ "sTitle": "Id","aTargets": [2] },
+				{ "sTitle": "Author", "sClass": "center","aTargets": [3] },
+				{
+					"sTitle": "Size",
+					"aTargets": [4],
+					"sClass": "center"
+					
+					
+				}
+			]
+	
+	  
+	   
+	    } );
+	} );  
+	
+	</script>
+	</body>
+	<!-- /container -->
+</body>
+</html>

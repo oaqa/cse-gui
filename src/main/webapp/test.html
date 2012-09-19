@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Test · CSE Framework </title>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script src="js/LAB.min.js?2.0.3"></script>
+<script>
+  $LAB.script("js/jquery-1.7.2.min.js").wait().script("js/prettify.js").script(
+      "js/lang-yaml.js").script("js/hogan-2.0.0.min.js").wait().script(
+      "js/functions.js").wait().script("js/bootstrap.min.js?2.0.4").script(
+      "js/d3.v2.min.js").script("js/common.js").wait()
+</script>
+<link rel="stylesheet" href="css/bootstrap.min.css?2.0.4">
+<link href="css/control.css" rel="stylesheet" type="text/css" />
+<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body data-offset="50">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<ul class="nav">
+					<a class="brand" href="./experiments.html">CSE Framework</a>
+					<li class="">
+					  <a href="./experiments.html">Experiments</a>
+					</li>
+					<li class="">
+					  <a href="trends.html">Trends</a>
+					</li>
+        			<li class="">
+					  <a href="./search.html">Ad-hoc QA</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<head>
+	<!-- <link rel="stylesheet" type="text/css" href="css/d3LineChart.css"> -->
+	<script src="js/d3.v2.min.js" type="text/javascript"></script>
+	<script src="js/d3.layout.min.js" type="text/javascript"></script>
+	<!-- <script src="js/d3.time.js" type="text/javascript"></script> -->
+	<link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+	<link type="text/css" rel="stylesheet" href="css/graph.css">
+	<link type="text/css" rel="stylesheet" href="css/detail.css">
+	<link type="text/css" rel="stylesheet" href="css/legend.css">
+	<link type="text/css" rel="stylesheet" href="css/extensions.css">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="css/prettify.css">
+	<link type="text/css" rel="stylesheet" href="css/rickshaw.min.css">
+	<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+	
+	<script src="js/Rickshaw.js" type="text/javascript"></script>
+	<!--   <script type="text/javascript" src="js/jquery.tipsy.js"></script>-->
+	<link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+	<script src="js/Rickshaw.Class.js"></script>
+	<script src="js/Rickshaw.Compat.ClassList.js"></script>
+	<script src="js/Rickshaw.Graph.js"></script>
+	<script src="js/Rickshaw.Graph.Renderer.js"></script>
+	<script src="js/Rickshaw.Graph.Renderer.Area.js"></script>
+	<script src="js/Rickshaw.Graph.Renderer.Line.js"></script>
+	<script src="js/Rickshaw.Graph.Renderer.Stack.js"></script>
+	
+	<script src="js/Rickshaw.Graph.Renderer.Bar.js"></script>
+	<script src="js/Rickshaw.Graph.Renderer.ScatterPlot.js"></script>
+	<script src="js/Rickshaw.Graph.RangeSlider.js"></script>
+	<script src="js/Rickshaw.Graph.HoverDetail.js"></script>
+	<script src="js/Rickshaw.Graph.Annotate.js"></script>
+	<script src="js/Rickshaw.Graph.Legend.js"></script>
+	<script src="js/Rickshaw.Graph.Axis.Time.js"></script>
+	<script src="js/Rickshaw.Graph.Behavior.Series.Toggle.js"></script>
+	<script src="js/Rickshaw.Graph.Behavior.Series.Order.js"></script>
+	<script src="js/Rickshaw.Graph.Behavior.Series.Highlight.js"></script>
+	<script src="js/Rickshaw.Graph.Smoother.js"></script>
+	<script src="js/Rickshaw.Graph.Unstacker.js"></script>
+	<script src="js/Rickshaw.Fixtures.Time.js"></script>
+	<script src="js/Rickshaw.Fixtures.Number.js"></script>
+	<script src="js/Rickshaw.Fixtures.RandomData.js"></script>
+	<script src="js/Rickshaw.Fixtures.Color.js"></script>
+	<script src="js/Rickshaw.Color.Palette.js"></script>
+	<script src="js/Rickshaw.Graph.Axis.X.js"></script>
+	<script src="js/Rickshaw.Graph.Axis.Y.js"></script>
+	<script src="js/Rickshaw.Graph.JSONP.js"></script>
+	<script src="js/Rickshaw.Graph.AjaxList.js"></script>
+	<script src="js/extensions.js"></script>
+	<script src="js/cse-util.js"></script>
+	<script src="js/async.min.js"></script>
+	</head>
+	
+	<body>
+	
+	</body>
+	
+	<script>
+	
+	function callbackFunctor(g, params){
+		if(params.length ==1)
+			return combinator(params[0],null);
+		
+		var f1 = params[0];
+		var rest = params.slice(1,params.length);
+		return combinator(f1,callbackFunctor(g,rest));
+	}
+	
+	function combinator(f1,f2,x){
+		if(f2 == null)
+			return schonfinkelize(f1,null);
+		return schonfinkelize(f1,f2);
+	}
+	
+	var reqfunc = function request(string,callback){ 
+		var req = $.ajax({
+		url: "test.html",
+		complete: function(response,status){
+			callback(null,string);
+		}
+		});
+	}
+	
+	function getDBQuery(query){
+		return schonfinkelize(reqfunc,query);
+	}
+	
+	
+	
+	function schonfinkelize(fn) {
+	    var slice = Array.prototype.slice,
+	       stored_args = slice.call(arguments, 1);
+	    return function () {
+	       var new_args = slice.call(arguments),
+	             args = stored_args.concat(new_args);
+	       return fn.apply(null, args);
+	    };
+	}
+	
+	var gfunc = function g(string1,string2,string3){
+		console.log(string1,string2,string3);
+	}
+	var f1 = schonfinkelize(reqfunc, 'is');
+	var f2 = schonfinkelize(reqfunc, 'this');
+	var f3 = schonfinkelize(reqfunc, 'synchronous');
+	
+	//var func = callbackFunctor(gfunc,[f1,f2,f3]);
+	//func(gfunc);
+	async.series([
+	  one:  f1,
+	   two: f2,
+	   three: f3
+	],
+	// optional callback
+	function(err, results){
+	    gfunc(results);
+	});
+	</script>
+</body>
+</html>

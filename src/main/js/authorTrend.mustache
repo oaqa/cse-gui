@@ -1,0 +1,133 @@
+<head>
+<title>D3 Line Chart</title>
+<!-- <link rel="stylesheet" type="text/css" href="css/d3LineChart.css"> -->
+<script src="js/d3.v2.min.js" type="text/javascript"></script>
+<script src="js/d3.layout.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+
+<!-- <script src="js/d3.time.js" type="text/javascript"></script> -->
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+<link type="text/css" rel="stylesheet" href="css/graph.css">
+<link type="text/css" rel="stylesheet" href="css/detail.css">
+<link type="text/css" rel="stylesheet" href="css/legend.css">
+<link type="text/css" rel="stylesheet" href="css/extensions.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/prettify.css"> -->
+<link type="text/css" rel="stylesheet" href="css/rickshaw.min.css">
+<script src="js/Rickshaw.js" type="text/javascript"></script>
+
+<!--   <script type="text/javascript" src="js/jquery.tipsy.js"></script>-->
+<link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+<script src="js/Rickshaw.Class.js"></script>
+<script src="js/Rickshaw.Compat.ClassList.js"></script>
+<script src="js/Rickshaw.Graph.js"></script>
+<script src="js/Rickshaw.Graph.Renderer.js"></script>
+<script src="js/Rickshaw.Graph.Renderer.Area.js"></script>
+<script src="js/Rickshaw.Graph.Renderer.Line.js"></script>
+<script src="js/Rickshaw.Graph.Renderer.Stack.js"></script>
+
+<script src="js/Rickshaw.Graph.Renderer.Bar.js"></script>
+<script src="js/Rickshaw.Graph.Renderer.ScatterPlot.js"></script>
+<script src="js/Rickshaw.Graph.RangeSlider.js"></script>
+<script src="js/Rickshaw.Graph.HoverDetail.js"></script>
+<script src="js/Rickshaw.Graph.Annotate.js"></script>
+<script src="js/Rickshaw.Graph.Legend.js"></script>
+<script src="js/Rickshaw.Graph.Axis.Time.js"></script>
+<script src="js/Rickshaw.Graph.Behavior.Series.Toggle.js"></script>
+<script src="js/Rickshaw.Graph.Behavior.Series.Order.js"></script>
+<script src="js/Rickshaw.Graph.Behavior.Series.Highlight.js"></script>
+<script src="js/Rickshaw.Graph.Smoother.js"></script>
+<script src="js/Rickshaw.Graph.Unstacker.js"></script>
+<script src="js/Rickshaw.Fixtures.Time.js"></script>
+<script src="js/Rickshaw.Fixtures.Number.js"></script>
+<script src="js/Rickshaw.Fixtures.RandomData.js"></script>
+<script src="js/Rickshaw.Fixtures.Color.js"></script>
+<script src="js/Rickshaw.Color.Palette.js"></script>
+<script src="js/Rickshaw.Graph.Axis.X.js"></script>
+<script src="js/Rickshaw.Graph.Axis.Y.js"></script>
+<script src="js/Rickshaw.Graph.JSONP.js"></script>
+<script src="js/Rickshaw.Graph.AjaxList.js"></script>
+<script src="js/extensions.js"></script>
+<script src="js/cse-util.js"></script>
+<script src="js/async.min.js"></script>
+
+</head>
+
+
+
+<body>
+	<style>
+#chart_container {
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#chart {
+	position: relative;
+}
+
+#y_axis {
+	position: relative;
+	top: 40px;
+}
+</style>
+
+<div id="container">
+
+		<form id="side_panel">
+			<section>
+				<div id="legend"></div>
+			</section>
+			<section>
+				<div id="renderer_form" class="toggler">
+					<input type="radio" name="renderer" id="area" value="area">
+					<label for="area">area</label> <input type="radio" name="renderer"
+						id="bar" value="bar"> <label for="bar">bar</label> <input
+						type="radio" name="renderer" id="line" value="line" checked> <label
+						for="line">line</label> <input type="radio" name="renderer"
+						id="scatter" value="scatterplot"> <label for="scatter">scatter</label>
+				</div>
+			</section>
+			<section>
+				<div id="offset_form">
+					</label> <label for="stream"> <input type="radio" name="offset"
+						id="stream" value="wiggle"> <span>stream</span>
+					</label> <label for="pct"> <input type="radio" name="offset"
+						id="pct" value="expand"> <span>pct</span>
+					</label> <label for="value"> <input type="radio" name="offset"
+						id="value" value="value" checked> <span>value</span>
+					</label>
+				</div>
+				<div id="interpolation_form">
+					<label for="cardinal"> <input type="radio"
+						name="interpolation" id="cardinal" value="cardinal" checked>
+						<span>cardinal</span>
+					</label> <label for="linear"> <input type="radio"
+						name="interpolation" id="linear" value="linear"> <span>linear</span>
+					</label> <label for="step"> <input type="radio"
+						name="interpolation" id="step" value="step-after"> <span>step</span>
+					</label>
+				</div>
+			</section>
+			<section>
+				<h6>Smoothing</h6>
+				<div id="smoother"></div>
+			</section>
+			<section></section>
+		</form>
+		
+		<div id="chart_container">
+			<div id="chart"></div>
+			<div id="timeline"></div>
+			<div id="slider"></div>
+			<div id="subchart"></div>
+		</div>
+		
+	</div>
+	<script>
+	
+	
+		
+	</script>
+
+</body>
