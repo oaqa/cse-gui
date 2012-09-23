@@ -1,0 +1,106 @@
+experiments: |
+  SELECT id, name, author, date, size FROM experiment ORDER BY date DESC
+experiment: |
+  SELECT count(*) AS executions, 
+  experiment.size AS size,
+  avg(endTime - startTime) / 60000 AS avg_exec_time, 
+  sum(endTime - startTime) / 3600000 AS execution_time, 
+  (max(endTime) - min(startTime)) / 3600000 AS wall_time, 
+  strftime('%f',max(endTime)/1000) AS last_execution,
+  experiment.id, name, author, experiment.date, resource, configuration
+  FROM cas JOIN experiment ON experiment.id = cas.experiment
+  WHERE cas.experiment = ?
+experiment-meta: |
+ SELECT phase, stage, size FROM experiment_meta WHERE experiment = ?
+topics-progress: |
+ SELECT sequenceid,  
+   count(*) as executions,
+   avg(endTime - startTime) / 60000 as avg_time_mins, 
+   max(endTime - startTime) / 60000 as max_time_mins, 
+   (max(endTime) - min(startTime)) / 3600000 as wall_time_hrs,
+   sum(case when status = 'SUCCESS' then 1 else 0 end) as success, 
+   sum(case when status = 'FAILURE' then 1 else 0 end) as failures,
+   question, hostname, 
+   strftime('%f',max(endTime)/1000) as last_execution
+  FROM cas 
+  WHERE cas.experiment = ?
+  GROUP BY sequenceid, hostname
+  ORDER BY executions DESC, wall_time_hrs ASC;
+stage-meta: |
+ SELECT distinct stage FROM experiment_meta WHERE experiment = ? ORDER BY stage ASC 
+f-measure: |
+  SELECT experimentId AS id,
+   evaluator,traceId,prec,recall,f1,map,binary_recall,count,stage,traceHash FROM fmeasure_eval 
+  WHERE experimentId = ? AND stage = ? ORDER BY map DESC
+map-measure: |
+  SELECT experimentId AS id,
+    evaluator,traceId,evaluator,docmap,psgmap,aspmap,count,stage,traceHash FROM map_eval 
+  WHERE experimentId = ? AND stage = ? ORDER BY docmap DESC 
+
+f1-metrics: |
+  SELECT sql FROM sqlite_master WHERE tbl_name = 'fmeasure_eval' AND type = 'table';
+
+f1-measure-time: |
+  SELECT dataset,  date AS x, f1 AS y FROM fmeasure_eval,experiment 
+  WHERE fmeasure_eval.experimentId = experiment.id AND f1 <> 0 AND map <> 0 AND recall <> 0 AND binary_recall <> 0 AND prec <> 0 
+  AND author = ? AND dataset = TRIM(?)
+  ORDER BY date ASC 
+
+map-measure-time: |
+  SELECT  date AS x,dataset, map AS y FROM fmeasure_eval,experiment
+  WHERE fmeasure_eval.experimentId = experiment.id AND f1 <> 0 AND map <> 0 AND recall <> 0 AND binary_recall <> 0 AND prec <> 0 
+  AND author = ? AND dataset = TRIM(?)
+  ORDER BY date ASC 
+
+recall-measure-time: |
+  SELECT  date AS x, recall AS y FROM fmeasure_eval,experiment
+  WHERE fmeasure_eval.experimentId = experiment.id AND  f1 <> 0 AND map <> 0 AND recall <> 0 AND binary_recall AND prec <> 0  
+  AND author = ? AND dataset = TRIM(?)
+  ORDER BY date ASC 
+
+binary_recall-measure-time: |
+  SELECT dataset, date AS x, binary_recall AS y FROM fmeasure_eval,experiment 
+  WHERE fmeasure_eval.experimentId = experiment.id AND  f1 <> 0 AND map <> 0 AND recall <> 0 AND binary_recall AND prec <> 0 
+  AND author = ? AND dataset = TRIM(?)
+  ORDER BY date ASC 
+
+prec-measure-time: |
+  SELECT dataset,  date AS x, prec AS y FROM fmeasure_eval,experiment 
+  WHERE fmeasure_eval.experimentId = experiment.id AND f1 <> 0 AND map <> 0 AND recall <> 0 AND binary_recall AND prec <> 0 
+  AND author = ? AND dataset = TRIM(?)
+  ORDER BY date ASC 
+
+
+f-metric: |
+  SELECT dataset, date AS x, ? AS y FROM fmeasure_eval,experiment
+  WHERE fmeasure_eval.id = experiment.id ORDER BY date ASC
+
+    
+
+
+f-measure-time-test: |
+  SELECT author, date AS x, f1 AS y FROM fmeasure_eval,experiment
+  WHERE fmeasure_eval.id = experiment.id AND f1 <> 0 ORDER BY date ASC
+
+authors: |
+  SELECT DISTINCT author FROM experiment WHERE author NOT IN ('ruil', 'elmer', 'junit','cse')
+
+datasets: |
+  SELECT DISTINCT dataset,author FROM experiment WHERE author = ?
+
+map-metrics: |
+  SELECT sql FROM sqlite_master WHERE tbl_name = 'map_eval' AND type = 'table';
+
+error-analysis: |
+  SELECT passage_aggregates.sequenceid AS sid, question, retrieved, relevant, avg(avep) AS av_map, avg(psgavep) AS psgmap 
+  FROM map_aggregates, passage_aggregates,inputelement   
+  WHERE passage_aggregates.sequenceid = inputelement.sequenceid 
+  AND passage_aggregates.experimentId = ?  
+  AND passage_aggregates.stage = ? 
+  AND passage_aggregates.traceHash = ? 
+  AND passage_aggregates.experimentId = map_aggregates.experimentId 
+  AND passage_aggregates.stage = map_aggregates.stage 
+  AND map_aggregates.sequenceId = inputelement.sequenceId 
+  AND avep > 0 
+  GROUP BY passage_aggregates.sequenceid ORDER BY av_map DESC
+

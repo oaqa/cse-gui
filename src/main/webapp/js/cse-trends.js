@@ -5,7 +5,7 @@ function generateGraph(author, dataset) {
 	async.waterfall([ function(callback) {
 		ajaxQuery(FMETRIC_BASE_QUERY, author, dataset, callback);
 	}, function(result, author, dataset, callback) {
-		var urls = generateURLs(result, dataset, author);
+		var urls = generateURLs(extractMetricsFromResult(result), dataset, author);
 		callback(null, result, urls);
 	}, function(result, urls, callback) {
 		var series = generateSeries(result);
@@ -18,6 +18,21 @@ function generateGraph(author, dataset) {
 		// initRawGraph({"x": 0 , "y":0});
 	});
 
+}
+
+function extractMetricsFromResult(result){
+	console.log(result.rows[0].sql.split(','));
+	var columns = Array();
+	columns = result.rows[0].sql.split(',');
+	var metrics = Array();
+	
+	for (var i= 0; i <columns.length; i++)
+		if(columns[i].match("FLOAT") != null){
+			var tmp = columns[i].split(" ");
+			metrics.push(tmp[1]);
+		}
+	console.log(metrics);
+	return metrics;
 }
 
 function getData(json) {
@@ -64,8 +79,9 @@ function getData(json) {
 
 function generateURLs(data, dataset, author) {
 	var urls = new Array();
-	data.rows.forEach(function(m) {
-		urls.push(BASE_QUERY + m.COLUMN_NAME + "-measure-time/" + author + "/"
+	console.log(data);
+	data.forEach(function(m) {
+		urls.push(BASE_QUERY + m + "-measure-time/" + author + "/"
 				+ dataset);
 	});
 	return urls;

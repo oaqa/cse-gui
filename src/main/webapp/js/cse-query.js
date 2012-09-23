@@ -37,7 +37,6 @@ function doSearch() {
     var data = templates.searchResults.render(json);
     $("#search-results").append(data);
     $("#search-btn").button("reset");
-    highlight();
   }).fail(function(jqXHR, textStatus) {
     alert("Request failed: " + textStatus);
     $("#search-btn").button("reset");
