@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
+        "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+<New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg>jdbc/cse</Arg>
+    <Arg>
+     <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+       <Set name="driverClass">org.sqlite.JDBC</Set>
+       <Set name="jdbcUrl">jdbc:sqlite:helloqa/data/oaqa-eval.db3</Set>
+       <Set name="user">admin</Set>
+       <Set name="password">admin</Set>
+     </New>
+    </Arg>
+   </New>
+</Configure>

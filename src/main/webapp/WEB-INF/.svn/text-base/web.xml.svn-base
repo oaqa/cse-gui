@@ -1,0 +1,34 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/cse</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<servlet>
+		<display-name>DetailController</display-name>
+		<servlet-name>DetailController</servlet-name>
+		<servlet-class>mx.bigdata.datalib.controller.DetailController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<display-name>TableController</display-name>
+		<servlet-name>TableController</servlet-name>
+		<servlet-class>mx.bigdata.datalib.controller.TableController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DetailController</servlet-name>
+		<url-pattern>/data/detail/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TableController</servlet-name>
+		<url-pattern>/data/table/*</url-pattern>
+	</servlet-mapping>
+</web-app>
